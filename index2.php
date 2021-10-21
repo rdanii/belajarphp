@@ -30,11 +30,6 @@
           <tbody>
             <?php
             include 'koneksi.php';
-            //           $barang = mysqli_query($koneksi, "SELECT a.nama_barang as nama_barang, c.merk as merk, a.harga as harga, b.kategori as kategori, a.jumlah_barang as jumlah_barang 
-            // FROM tbl_barang as a, tbl_kategori as b, tbl_merk as c  
-            // WHERE a.kategori = b.id 
-            // AND a.merk = c.id
-            // ");
             $barang = mysqli_query($koneksi, "SELECT * from tbl_barang  ");
             $no = 0;
 
