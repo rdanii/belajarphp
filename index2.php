@@ -143,7 +143,7 @@
               <tr>
                 <td><?= $no ?></td>
                 <td><?= $mrk['merk'] ?></td>
-                <td> <a href="hapus_merk.php?id=<?php echo $mrk['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin hapus ?')">Hapus</a></td>
+                <td> <a href="edit_merk.php?id=<?php echo $mrk['id'] ?>" class="btn btn-sm btn-warning">Edit</a> <a href="hapus_merk.php?id=<?php echo $mrk['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin hapus ?')">Hapus</a></td>
               </tr>
 
             <?php }
