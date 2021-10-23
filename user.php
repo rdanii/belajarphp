@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
   <meta charset="UTF-8">
@@ -9,11 +9,11 @@
 </head>
 
 <body>
-  <div class="container col-md-8 mt-4">
+  <div class="container col-md-10 mt-4 mb-2">
     <h1>User Management</h1>
     <div class="card">
-      <div class="card-header bg-success text-white">
-        DATA USER <a href="tambah_user.php" class="btn btn-sm btn-primary float-right">Tambah</a>
+      <div class="card-header bg-primary text-white">
+        DATA USER <a href="tambah_user.php" class="btn btn-sm btn-success float-right">Tambah</a>
       </div>
       <div class="card-body">
         <table class="table table-bordered">
@@ -23,6 +23,7 @@
               <th>Username</th>
               <th>Nama</th>
               <th>Password</th>
+              <th>Email</th>
               <th>Aksi</th>
             </tr>
           </thead>
@@ -41,9 +42,10 @@
                 <td><?php echo $data['username'] ?></td>
                 <td><?php echo $data['nama'] ?></td>
                 <td><?php echo $data['password'] ?></td>
+                <td><?php echo $data['email'] ?></td>
                 <td>
-                  <a href="edit.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-warning">Edit</a>
-                  <a href="hapus.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('anda yakin ingin hapus?')">Hapus</a>
+                  <a href="edit_user.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-warning">Edit</a>
+                  <a href="hapus_user.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin hapus?')">Hapus</a>
                 </td>
               </tr>
             <?php

@@ -42,7 +42,7 @@
             <label>Jumlah</label>
             <input class="form-control" name="jumlah" value="<?php echo $row['jumlah_barang']; ?>">
           </div>
-          <button type="submit" class="btn btn-primary" name="submit">Update Data</button>
+          <button type="submit" class="btn btn-primary" name="submit" onclick="return confirm('Anda yakin ingin mengubah ?')">Update Data</button>
         </form>
 
         <?php
