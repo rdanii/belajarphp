@@ -34,6 +34,7 @@
       include('koneksi.php');
 
       if (isset($_POST['submit'])) {
+        // $email = $_POST['email'];
 
         $username = $_POST['username'];
         $password = md5($_POST['password']);
@@ -44,6 +45,7 @@
         if ($password == $row['password']) {
           session_start();
           $_SESSION['username'] = $username;
+          // $_SESSION['email'] = $email;
       ?>
           <script>
             window.location = 'user.php';
@@ -53,7 +55,7 @@
         ?>
           <script>
             alert('Password tidak cocok.')
-            window.location = 'login.php'
+            window.location = 'login2.php'
           </script>
         <?php
         }
