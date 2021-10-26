@@ -27,7 +27,7 @@
                         <input type="text" name="merk" class="form-control" value="<?php echo $row['merk'] ?>">
                         <input type="hidden" name='id' value="<?php echo $row['id'] ?>">
                     </div>
-                    <button type="submit" name="submit" class="btn btn-success">Update</button>
+                    <button type="submit" name="submit" class="btn btn-success" onclick="return confirm('Anda yakin ingin mengubah ?')">Update</button>
                 </form>
                 <?php
                 if (isset($_POST['submit'])) {

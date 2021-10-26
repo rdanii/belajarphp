@@ -110,7 +110,7 @@
     </div>
   </div>
 
-  <div class="container col-md-4 mt-4">
+  <div class="container col-md-4 mt-4 mb-2">
     <h1>Tabel Merk</h1>
     <div class="card">
       <div class="card-header bg-primary text-white">DATA MERK <a href="tambah_merk.php" class="btn btn-sm btn-success float-right">Tambah</a>

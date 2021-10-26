@@ -27,6 +27,10 @@
             <label>Password</label>
             <input type="password" name='password' class='form-control'>
           </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="text" name="email" class="form-control">
+          </div>
 
           <button type="submit" class='btn btn-success' name='submit'>Simpan</button>
 
@@ -38,12 +42,13 @@
       include('koneksi.php');
 
       if (isset($_POST['submit'])) {
-
+        
         $username = $_POST['username'];
         $nama = $_POST['nama'];
         $password = md5($_POST['password']);
+        $email = $_POST['email'];
 
-        $data = mysqli_query($koneksi, "INSERT INTO tbl_user (username,nama,`password`)values('$username', '$nama', '$password')")
+        $data = mysqli_query($koneksi, "INSERT INTO tbl_user (username,nama,`password`,email)values('$username', '$nama', '$password', '$email') ")
           or die(mysqli_error($koneksi));
 
       ?>
