@@ -1,3 +1,14 @@
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+?>
+  <script>
+    alert('Anda belum login.')
+    window.location = 'login.php'
+  </script>
+<?php
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,6 +64,7 @@
         </table>
       </div>
     </div>
+    <a href="logout.php" class="btn btn-sm btn-danger" onclick="return confirm('anda yakin ingin logout?')">Logout</a>
   </div>
   <script type="text/javascript" src="assets/js/jquery.min.js"></script>
   <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
