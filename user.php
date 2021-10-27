@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['email'])) {
 ?>
   <script>
     alert('Anda belum login.')
@@ -24,7 +24,9 @@ if (!isset($_SESSION['username'])) {
     <h1>User Management</h1>
     <div class="card">
       <div class="card-header bg-primary text-white">
-        DATA USER <a href="tambah_user.php" class="btn btn-sm btn-success float-right">Tambah</a>
+        DATA USER <a href="tambah_user.php" class="btn btn-sm btn-success float-right">Tambah</a> 
+        <br>
+        <?php echo $_SESSION['email'] ?>
       </div>
       <div class="card-body">
         <table class="table table-bordered">

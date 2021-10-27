@@ -42,6 +42,8 @@
           or die(mysqli_error($koneksi));
         $row = mysqli_fetch_assoc($data);
         if ($password == $row['password']) {
+          session_start();
+          $_SESSION['email'] = $email ;
       ?>
           <script>
             window.location = 'user.php';

@@ -4,7 +4,7 @@ session_unset();
 session_destroy();
 
 
-echo "Username = " . $_SESSION['username'];
+echo "Email = " . $_SESSION['email'];
 
 ?>
 <script>
