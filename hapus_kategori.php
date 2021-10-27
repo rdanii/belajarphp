@@ -8,5 +8,5 @@ $data = mysqli_query($koneksi, "DELETE from tbl_kategori where id ='$id'") or di
 ?>
 //alert dan redirect ke index.php
 <script>
-    window.location = 'index2.php';
+    window.location = 'tbl_kategori.php';
 </script>

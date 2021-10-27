@@ -32,7 +32,7 @@
                 $data = mysqli_query($koneksi, "INSERT Into tbl_merk(merk)values('$nama')") or die(mysqli_error($koneksi));
             ?>
                 <script>
-                    window.location = 'index2.php'
+                    window.location = 'tbl_merk.php'
                 </script>
             <?php
             }

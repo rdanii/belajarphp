@@ -9,7 +9,7 @@
 
 <body>
     <div class='container col-md-4 mt-4'>
-        <h3>Tabel Kategori</h3>
+        <h3>Kategori</h3>
         <div class='card'>
             <div class='card-header bg-primary text-white'>
                 Tambah Kategori
@@ -39,7 +39,7 @@
 
             ?>
                 <script>
-                    window.location = 'index2.php';
+                    window.location = 'tbl_kategori.php';
                 </script>
             <?php
             }

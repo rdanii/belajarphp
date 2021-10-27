@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['email'])) {
+if (!isset($_SESSION['username'])) {
 ?>
   <script>
     alert('Anda belum login.')
@@ -44,6 +44,10 @@ if (!isset($_SESSION['email'])) {
   <div class="wrapper">
 
     <!-- Preloader -->
+    <div class="preloader flex-column justify-content-center align-items-center">
+      <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+    </div>
+
     <!-- <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
   </div> -->
@@ -115,10 +119,10 @@ if (!isset($_SESSION['email'])) {
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-            <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            <img src="img/profil.png" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">User</a>
+            <a href="#" class="d-block">Rahmat Dani</a>
           </div>
         </div>
 
@@ -150,15 +154,7 @@ if (!isset($_SESSION['email'])) {
               </a>
             </li>
             <li class="nav-item">
-              <a href="kategori.php" class="nav-link">
-                <i class="nav-icon fas fa-list"></i>
-                <p>
-                  Kategori
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="barang.php" class="nav-link">
+              <a href="tbl_barang.php" class="nav-link">
                 <i class="nav-icon fas fa-box"></i>
                 <p>
                   Barang
@@ -166,7 +162,15 @@ if (!isset($_SESSION['email'])) {
               </a>
             </li>
             <li class="nav-item">
-              <a href="merk.php" class="nav-link">
+              <a href="tbl_kategori.php" class="nav-link">
+                <i class="nav-icon fas fa-list"></i>
+                <p>
+                  Kategori
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="tbl_merk.php" class="nav-link">
                 <i class="nav-icon fas fa-copyright"></i>
                 <p>Merk
                 </p>
@@ -270,9 +274,6 @@ if (!isset($_SESSION['email'])) {
     <footer class="main-footer">
       <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
       All rights reserved.
-      <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 3.1.0
-      </div>
     </footer>
 
     <!-- Control Sidebar -->

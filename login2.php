@@ -16,8 +16,8 @@
       <div class='card-body'>
         <form action="" method="post" role="form">
           <div class='form-group'>
-            <label>Email</label>
-            <input type="text" name='email' class='form-control'>
+            <label>Username</label>
+            <input type="text" name='username' class='form-control'>
           </div>
           <div class='form-group'>
             <label>Password</label>
@@ -36,15 +36,15 @@
       if (isset($_POST['submit'])) {
         // $email = $_POST['email'];
 
-        $email = $_POST['email'];
+        $username = $_POST['username'];
         $password = md5($_POST['password']);
 
-        $data = mysqli_query($koneksi, "SELECT * FROM tbl_user WHERE email='$email'")
+        $data = mysqli_query($koneksi, "SELECT * FROM tbl_user WHERE username='$username'")
           or die(mysqli_error($koneksi));
         $row = mysqli_fetch_assoc($data);
         if ($password == $row['password']) {
           session_start();
-          $_SESSION['email'] = $email;
+          $_SESSION['username'] = $username;
       ?>
           <script>
             window.location = 'dashboard.php';

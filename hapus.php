@@ -9,5 +9,5 @@ $data = mysqli_query($koneksi, "DELETE from tbl_barang where id ='$id'") or die(
 //alert dan redirect ke index.php
 <script>
     alert('data berhasil dihapus.');
-    window.location = 'index2.php';
+    window.location = 'tbl_barang.php';
 </script>

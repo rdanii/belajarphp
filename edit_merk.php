@@ -36,7 +36,7 @@
                     mysqli_query($koneksi, "UPDATE tbl_merk set merk = '$nama' where id = '$id'") or die(mysqli_error($koneksi));
                 ?>
                     <script>
-                        window.location = 'index2.php'
+                        window.location = 'tbl_merk.php'
                     </script>
                 <?php
                 }

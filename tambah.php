@@ -49,7 +49,7 @@
           //ini untuk menampilkan alert berhasil dan redirect ke halaman index
           ?>
           <script>alert('data berhasil disimpan.')
-          window.location='index2.php'</script>
+          window.location='tbl_barang.php'</script>
           <?php
         }
         ?>

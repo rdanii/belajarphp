@@ -59,8 +59,8 @@
 
           //redirect ke halaman index.php
           <script>
-            alert('data berhasil diupdate.');
-            window.location = 'index2.php'
+            alert('Data berhasil diupdate.');
+            window.location = 'tbl_barang.php'
           </script>
         <?php } ?>
       </div>
