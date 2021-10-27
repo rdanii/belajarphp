@@ -51,7 +51,7 @@
                     mysqli_query($koneksi, "UPDATE tbl_user set username='$username', nama='$nama', `password`='$password', email='$email' where id = '$id'") or die(mysqli_error($koneksi));
                 ?>
                     <script>
-                        window.location = 'user.php'
+                        window.location = 'dashboard.php'
                     </script>
                 <?php
                 }

@@ -1,12 +1,3 @@
-<?php session_start();
-if (!isset($_SESSION['email']))
-?>
-<script>
-  alert('Anda belum login')
-  window.location = 'login.php'
-</script>
-
-
 <!DOCTYPE html>
 <html>
 
@@ -48,24 +39,24 @@ if (!isset($_SESSION['email']))
 
       </form>
       <?php
-    include('koneksi.php');
+      include('koneksi.php');
 
-    if (isset($_POST['submit'])) {
+      if (isset($_POST['submit'])) {
 
-      $username = $_POST['username'];
-      $nama = $_POST['nama'];
-      $password = md5($_POST['password']);
-      $email = $_POST['email'];
+        $username = $_POST['username'];
+        $nama = $_POST['nama'];
+        $password = md5($_POST['password']);
+        $email = $_POST['email'];
 
-      $data = mysqli_query($koneksi, "INSERT INTO tbl_user (username,nama,`password`,email)values('$username', '$nama', '$password', '$email') ")
-        or die(mysqli_error($koneksi));
+        $data = mysqli_query($koneksi, "INSERT INTO tbl_user (username,nama,`password`,email)values('$username', '$nama', '$password', '$email') ")
+          or die(mysqli_error($koneksi));
 
       ?>
         <script>
-          window.location = 'user.php';
+          window.location = 'dashboard.php';
         </script>
       <?php
-    }
+      }
       ?>
 
     </div>

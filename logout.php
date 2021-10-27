@@ -9,5 +9,5 @@ echo "Email = " . $_SESSION['email'];
 ?>
 <script>
   alert('Anda telah logout.')
-  window.location = 'login.php'
+  window.location = 'login2.php'
 </script>

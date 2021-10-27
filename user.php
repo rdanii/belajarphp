@@ -4,7 +4,7 @@ if (!isset($_SESSION['email'])) {
 ?>
   <script>
     alert('Anda belum login.')
-    window.location = 'login2.php'
+    window.location = 'login.php'
   </script>
 <?php
 }
