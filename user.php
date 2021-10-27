@@ -4,7 +4,7 @@ if (!isset($_SESSION['email'])) {
 ?>
   <script>
     alert('Anda belum login.')
-    window.location = 'login.php'
+    window.location = 'login2.php'
   </script>
 <?php
 }
@@ -24,9 +24,9 @@ if (!isset($_SESSION['email'])) {
     <h1>User Management</h1>
     <div class="card">
       <div class="card-header bg-primary text-white">
-        DATA USER <a href="tambah_user.php" class="btn btn-sm btn-success float-right">Tambah</a> 
-        <br>
-        <?php echo $_SESSION['email'] ?>
+        DATA USER <a href="tambah_user.php" class="btn btn-sm btn-success float-right">Tambah</a>
+
+        <h5>Halo, <?php echo $_SESSION['username']; ?> Selamat Datang</h5>
       </div>
       <div class="card-body">
         <table class="table table-bordered">
