@@ -1,7 +1,7 @@
     <?php
     include "header.php";
     ?>
-    
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
@@ -30,113 +30,132 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header bg-primary text-white">
-                  DATA USER <a href="tambah_user.php" class="btn btn-sm btn-success float-right">Tambah</a>
-
+                  <!-- DATA USER <a href="tambah_user.php" class="btn btn-sm btn-success float-right">Tambah</a> -->
+                  <button type="button" class="btn btn-sm btn-success float-right" data-toggle="modal" data-target="#myModal">Tambah User</button>
                   <h5>Halo, <?php echo $_SESSION['username'] ?> Selamat Datang</h5>
                 </div>
-                <div class="card-body">
-                  <table class="table table-bordered">
-                    <thead>
-                      <tr>
-                        <th>No</th>
-                        <th>Username</th>
-                        <th>Nama</th>
-                        <th>Password</th>
-                        <th>Email</th>
-                        <th>Aksi</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                      include 'koneksi.php';
-                      $user = mysqli_query($koneksi, "SELECT * from tbl_user  ");
-                      $no = 0;
+                <!-- init modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                  <div class="modal-dialog">
 
-                      foreach ($user as $data) {
-                        $no++;
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                      </div>
+                      <div class="modal-body">
+
+                        <form action="" method="post" role="form">
+                          <div class='form-group'>
+                            <label>Username</label>
+                            <input type="text" name='username' class='form-control'>
+                          </div>
+                          <div class='form-group'>
+                            <label>Nama Lengkap</label>
+                            <input type="text" name='nama' class='form-control'>
+                          </div>
+                          <div class='form-group'>
+                            <label>Password</label>
+                            <input type="password" name='password' class='form-control'>
+                          </div>
+                          <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" name="email" class="form-control">
+                          </div>
+
+                          <button type="submit" class='btn btn-success' name='submit'>Simpan</button>
+
+                      </div>
+
+
+                      </form>
+                      <?php
+                      include('koneksi.php');
+
+                      if (isset($_POST['submit'])) {
+
+                        $username = $_POST['username'];
+                        $nama = $_POST['nama'];
+                        $password = md5($_POST['password']);
+                        $email = $_POST['email'];
+
+                        $data = mysqli_query($koneksi, "INSERT INTO tbl_user (username,nama,`password`,email)values('$username', '$nama', '$password', '$email') ")
+                          or die(mysqli_error($koneksi));
 
                       ?>
-                        <tr>
-                          <td><?php echo $no ?></td>
-                          <td><?php echo $data['username'] ?></td>
-                          <td><?php echo $data['nama'] ?></td>
-                          <td><?php echo $data['password'] ?></td>
-                          <td><?php echo $data['email'] ?></td>
-                          <td>
-                            <a href="edit_user.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-warning">Edit</a>
-                            <a href="hapus_user.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin hapus?')">Hapus</a>
-                          </td>
-                        </tr>
+                        <script>
+                          window.location = 'dashboard.php';
+                        </script>
                       <?php
                       }
                       ?>
-                    </tbody>
-                  </table>
-                  <br>
-                  <div class="col-md-3">
-                    <a href="logout.php" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin logout?')">Logout</a>
-                    <br>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                   </div>
+
                 </div>
-
               </div>
-            </div>
 
-            <!-- ./col -->
+              <div class="card-body">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>Username</th>
+                      <th>Nama</th>
+                      <th>Password</th>
+                      <th>Email</th>
+                      <th>Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    include 'koneksi.php';
+                    $user = mysqli_query($koneksi, "SELECT * from tbl_user  ");
+                    $no = 0;
+
+                    foreach ($user as $data) {
+                      $no++;
+
+                    ?>
+                      <tr>
+                        <td><?php echo $no ?></td>
+                        <td><?php echo $data['username'] ?></td>
+                        <td><?php echo $data['nama'] ?></td>
+                        <td><?php echo $data['password'] ?></td>
+                        <td><?php echo $data['email'] ?></td>
+                        <td>
+                          <a href="edit_user.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-warning">Edit</a>
+                          <a href="hapus_user.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin hapus?')">Hapus</a>
+                        </td>
+                      </tr>
+                    <?php
+                    }
+                    ?>
+                  </tbody>
+                </table>
+                <br>
+                <div class="col-md-3">
+                  <a href="logout.php" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin logout?')">Logout</a>
+                  <br>
+                </div>
+              </div>
+
+            </div>
           </div>
-          <!-- /.row (main row) -->
-        </div><!-- /.container-fluid -->
-      </section>
-      <!-- /.content -->
+
+          <!-- ./col -->
+        </div>
+        <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    <footer class="main-footer">
-      <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-      All rights reserved.
-    </footer>
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
-  </div>
-  <!-- ./wrapper -->
-
-  <!-- jQuery -->
-  <script src="plugins/jquery/jquery.min.js"></script>
-  <!-- jQuery UI 1.11.4 -->
-  <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-  <script>
-    $.widget.bridge('uibutton', $.ui.button)
-  </script>
-  <!-- Bootstrap 4 -->
-  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- ChartJS -->
-  <script src="plugins/chart.js/Chart.min.js"></script>
-  <!-- Sparkline -->
-  <script src="plugins/sparklines/sparkline.js"></script>
-  <!-- JQVMap -->
-  <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-  <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-  <!-- jQuery Knob Chart -->
-  <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-  <!-- daterangepicker -->
-  <script src="plugins/moment/moment.min.js"></script>
-  <script src="plugins/daterangepicker/daterangepicker.js"></script>
-  <!-- Tempusdominus Bootstrap 4 -->
-  <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-  <!-- Summernote -->
-  <script src="plugins/summernote/summernote-bs4.min.js"></script>
-  <!-- overlayScrollbars -->
-  <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="dist/js/adminlte.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="dist/js/demo.js"></script>
-  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <script src="dist/js/pages/dashboard.js"></script>
-</body>
-
-</html>
+    <?php include 'footer.php';
