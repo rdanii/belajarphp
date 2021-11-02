@@ -42,7 +42,7 @@
                     <div class="modal-content">
                       <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Modal Header</h4>
+                        <h4 class="modal-title float-left">Tambah User</h4>
                       </div>
                       <div class="modal-body">
 
@@ -66,9 +66,6 @@
 
                           <button type="submit" class='btn btn-success' name='submit'>Simpan</button>
 
-                      </div>
-
-
                       </form>
                       <?php
                       include('koneksi.php');
@@ -90,8 +87,6 @@
                       <?php
                       }
                       ?>
-
-
 
                     </div>
                     <div class="modal-footer">
