@@ -44,9 +44,10 @@
         if ($password == $row['password']) {
           session_start();
           $_SESSION['email'] = $email ;
+          $_SESSION['username'] = $row['username'];
       ?>
           <script>
-            window.location = 'user.php';
+            window.location = 'dashboard.php';
           </script>
         <?php
         } else {
