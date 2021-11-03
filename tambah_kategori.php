@@ -23,10 +23,8 @@
 
                     <button type="submit" class='btn btn-success' name='submit'>Simpan</button>
 
+                </form>
             </div>
-
-
-            </form>
             <?php
             include('koneksi.php');
 

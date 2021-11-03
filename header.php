@@ -176,6 +176,13 @@ if (!isset($_SESSION['username'])) {
                 </p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="tbl_stok.php" class="nav-link">
+                <i class="nav-icon fas fa-list"></i>
+                <p>Stok
+                </p>
+              </a>
+            </li>
           </ul>
         </nav>
         <!-- /.sidebar-menu -->

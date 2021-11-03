@@ -22,9 +22,9 @@
                     </div>
                     <button type="submit" class="btn btn-success" name="submit">Simpan</button>
 
-            </div>
 
-            </form>
+                </form>
+            </div>
             <?php
             include 'koneksi.php';
             if (isset($_POST['submit'])) {

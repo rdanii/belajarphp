@@ -41,7 +41,7 @@
                     <!-- Modal content-->
                     <div class="modal-content">
                       <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
                         <h4 class="modal-title float-left">Tambah User</h4>
                       </div>
                       <div class="modal-body">
@@ -66,91 +66,91 @@
 
                           <button type="submit" class='btn btn-success' name='submit'>Simpan</button>
 
-                      </form>
+                        </form>
+                        <?php
+                        include('koneksi.php');
+
+                        if (isset($_POST['submit'])) {
+
+                          $username = $_POST['username'];
+                          $nama = $_POST['nama'];
+                          $password = md5($_POST['password']);
+                          $email = $_POST['email'];
+
+                          $data = mysqli_query($koneksi, "INSERT INTO tbl_user (username,nama,`password`,email)values('$username', '$nama', '$password', '$email') ")
+                            or die(mysqli_error($koneksi));
+
+                        ?>
+                          <script>
+                            window.location = 'dashboard.php';
+                          </script>
+                        <?php
+                        }
+                        ?>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="card-body">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Username</th>
+                        <th>Nama</th>
+                        <th>Password</th>
+                        <th>Email</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody>
                       <?php
-                      include('koneksi.php');
+                      include 'koneksi.php';
+                      $user = mysqli_query($koneksi, "SELECT * from tbl_user  ");
+                      $no = 0;
 
-                      if (isset($_POST['submit'])) {
-
-                        $username = $_POST['username'];
-                        $nama = $_POST['nama'];
-                        $password = md5($_POST['password']);
-                        $email = $_POST['email'];
-
-                        $data = mysqli_query($koneksi, "INSERT INTO tbl_user (username,nama,`password`,email)values('$username', '$nama', '$password', '$email') ")
-                          or die(mysqli_error($koneksi));
+                      foreach ($user as $data) {
+                        $no++;
 
                       ?>
-                        <script>
-                          window.location = 'dashboard.php';
-                        </script>
+                        <tr>
+                          <td><?php echo $no ?></td>
+                          <td><?php echo $data['username'] ?></td>
+                          <td><?php echo $data['nama'] ?></td>
+                          <td><?php echo $data['password'] ?></td>
+                          <td><?php echo $data['email'] ?></td>
+                          <td>
+                            <a href="edit_user.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="hapus_user.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin hapus?')">Hapus</a>
+                          </td>
+                        </tr>
                       <?php
                       }
                       ?>
-
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-              <div class="card-body">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>No</th>
-                      <th>Username</th>
-                      <th>Nama</th>
-                      <th>Password</th>
-                      <th>Email</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                    include 'koneksi.php';
-                    $user = mysqli_query($koneksi, "SELECT * from tbl_user  ");
-                    $no = 0;
-
-                    foreach ($user as $data) {
-                      $no++;
-
-                    ?>
-                      <tr>
-                        <td><?php echo $no ?></td>
-                        <td><?php echo $data['username'] ?></td>
-                        <td><?php echo $data['nama'] ?></td>
-                        <td><?php echo $data['password'] ?></td>
-                        <td><?php echo $data['email'] ?></td>
-                        <td>
-                          <a href="edit_user.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-warning">Edit</a>
-                          <a href="hapus_user.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin hapus?')">Hapus</a>
-                        </td>
-                      </tr>
-                    <?php
-                    }
-                    ?>
-                  </tbody>
-                </table>
-                <br>
-                <div class="col-md-3">
-                  <a href="logout.php" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin logout?')">Logout</a>
+                    </tbody>
+                  </table>
                   <br>
+                  <div class="col-md-3">
+                    <a href="logout.php" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin logout?')">Logout</a>
+                    <br>
+                  </div>
                 </div>
+
               </div>
-
             </div>
-          </div>
 
-          <!-- ./col -->
-        </div>
-        <!-- /.row (main row) -->
-    </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+            <!-- ./col -->
+          </div>
+          <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
     <?php include 'footer.php';

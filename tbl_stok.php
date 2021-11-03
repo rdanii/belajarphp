@@ -31,7 +31,7 @@ include 'header.php';
           <div class="card">
             <div class="card-header bg-secondary text-white">
               DATA KATEGORI
-              <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#myModal">Tambah Kategori</button>
+              <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#myModal">Tambah Stok</button>
             </div>
 
             <div class="modal fade" id="myModal" role="dialog">
@@ -39,15 +39,27 @@ include 'header.php';
 
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h4 class="modal-title float-left">Tambah Kategori</h4>
+                    <h4 class="modal-title float-left">Tambah Stok</h4>
                   </div>
 
                   <div class="modal-body">
 
                     <form action="" method="post" role="form">
                       <div class='form-group'>
-                        <label>Nama</label>
-                        <input type="text" name='nama' class='form-control'>
+                        <label>Nama Barang</label>
+                        <input type="text" name='nama_barang' class='form-control'>
+                      </div>
+                      <div class='form-group'>
+                        <label>Jumlah</label>
+                        <input type="text" name='jumlah_barang' class='form-control'>
+                      </div>
+                      <div class='form-group'>
+                        <label>Merk</label>
+                        <input type="text" name='merk' class='form-control'>
+                      </div>
+                      <div class='form-group'>
+                        <label>Jenis</label>
+                        <input type="text" name='jenis' class='form-control'>
                       </div>
 
                       <button type="submit" class='btn btn-success' name='submit'>Simpan</button>
@@ -59,14 +71,17 @@ include 'header.php';
 
                     if (isset($_POST['submit'])) {
 
-                      $nama = $_POST['nama'];
+                      $nama = $_POST['nama_barang'];
+                      $jumlah = $_POST['jumlah_barang'];
+                      $merk = $_POST['merk'];
+                      $jenis = $_POST['jenis'];
 
-                      $data = mysqli_query($koneksi, "INSERT INTO tbl_kategori (kategori)values('$nama')")
+                      $data = mysqli_query($koneksi, "INSERT INTO tbl_stok (nama_barang, jumlah_barang, merk, jenis)values('$nama', '$jumlah', '$merk', '$jenis')")
                         or die(mysqli_error($koneksi));
 
                     ?>
                       <script>
-                        window.location = 'tbl_kategori.php';
+                        window.location = 'tbl_stok.php';
                       </script>
                     <?php
                     }
@@ -89,7 +104,10 @@ include 'header.php';
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Kategori</th>
+                    <th>Nama Barang</th>
+                    <th>Jumlah</th>
+                    <th>Merk</th>
+                    <th>Jenis</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -101,19 +119,22 @@ include 'header.php';
                   // WHERE a.kategori = b.id 
                   // AND a.merk = c.id
                   // ");
-                  $kategori = mysqli_query($koneksi, "SELECT * from tbl_kategori");
+                  $kategori = mysqli_query($koneksi, "SELECT * from tbl_stok");
                   $no = 0;
 
                   foreach ($kategori as $data) {
                     $no++;
 
-                    'tbl_kategori';
+                    'tbl_stok';
                   ?>
                     <tr>
                       <td><?php echo $no ?></td>
-                      <td><?php echo $data['kategori'] ?></td>
-                      <td> <a href="edit_kategori.php?id=<?php echo $data['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
-                        <a href="hapus_kategori.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin hapus?')">Hapus</a>
+                      <td><?php echo $data['nama_barang'] ?></td>
+                      <td><?php echo $data['jumlah_barang'] ?></td>
+                      <td><?php echo $data['merk'] ?></td>
+                      <td><?php echo $data['jenis'] ?></td>
+                      <td> <a href="edit_stok.php?id=<?php echo $data['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="hapus_stok.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin hapus?')">Hapus</a>
                       </td>
                     </tr>
                   <?php } ?>
