@@ -27,7 +27,7 @@ include 'header.php';
     <div class="container-fluid">
       <!-- Small boxes (Stat box) -->
       <div class="row">
-        <div class="col-md-8 ml-5">
+        <div class="col-md-12">
           <div class="card">
             <div class="card-header bg-secondary text-white">
               DATA STOK
@@ -119,10 +119,10 @@ include 'header.php';
                   // WHERE a.kategori = b.id 
                   // AND a.merk = c.id
                   // ");
-                  $kategori = mysqli_query($koneksi, "SELECT * from tbl_stok");
+                  $stok = mysqli_query($koneksi, "SELECT * from tbl_stok");
                   $no = 0;
 
-                  foreach ($kategori as $data) {
+                  foreach ($stok as $data) {
                     $no++;
 
                     'tbl_stok';
@@ -133,10 +133,112 @@ include 'header.php';
                       <td><?php echo $data['jumlah_barang'] ?></td>
                       <td><?php echo $data['merk'] ?></td>
                       <td><?php echo $data['jenis'] ?></td>
-                      <td> <a href="edit_stok.php?id=<?php echo $data['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
-                        <a href="hapus_stok.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin hapus?')">Hapus</a>
+                      <td>
+                        <a data-toggle="modal" data-target="#myModaledit<?php echo $data['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
+                        <a data-toggle="modal" data-target="#myModalhapus<?php echo $data['id'] ?>" class="btn btn-sm btn-danger">Hapus</a>
                       </td>
                     </tr>
+
+                    <div class="modal fade" id="myModaledit<?php echo $data['id'] ?>" role="dialog">
+                      <div class="modal-dialog">
+
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                            <h4 class="modal-title float-left">Ubah Stok</h4>
+                          </div>
+                          <div class="modal-body">
+
+                            <form action="" method="post" role="form">
+                              <div class="form-group">
+                                <label>Nama</label>
+                                <!--  menampilkan nama barang -->
+                                <input type="text" name="nama_barang" required="" class="form-control" value="<?= $data['nama_barang']; ?>">
+
+                                <!-- ini digunakan untuk menampung id yang ingin diubah -->
+                                <input type="hidden" name="id" value="<?php echo $data['id'] ?>">
+                              </div>
+                              <div class="form-group">
+                                <label>Jumlah</label>
+                                <input type="text" name="jumlah_barang" class="form-control" value="<?php echo $data['jumlah_barang']; ?>">
+                              </div>
+
+                              <div class="form-group">
+                                <label>Merk</label>
+                                <input class="form-control" name="merk" value="<?php echo $data['merk']; ?>">
+                              </div>
+                              <div class="form-group">
+                                <label>Jenis</label>
+                                <input class="form-control" name="jenis" value="<?php echo $data['jenis']; ?>">
+                              </div>
+                              <button type="submit" class="btn btn-primary" name="submit2" onclick="return confirm('Anda yakin ingin mengubah ?')">Update Data</button>
+                            </form>
+                            <?php
+                            if (isset($_POST['submit2'])) {
+                              $id = $_POST['id'];
+                              $nama = $_POST['nama_barang'];
+                              $jumlah = $_POST['jumlah_barang'];
+                              $merk = $_POST['merk'];
+                              $jenis = $_POST['jenis'];
+
+                              //query mengubah barang
+                              mysqli_query($koneksi, "UPDATE tbl_stok set nama_barang='$nama', jumlah_barang='$jumlah', merk = '$merk', jenis = '$jenis' where id ='$id'") or die(mysqli_error($koneksi));
+                            ?>
+
+                              //redirect ke halaman index.php
+                              <script>
+                                alert('Data berhasil diupdate.');
+                                window.location = 'tbl_stok.php'
+                              </script>
+
+                            <?php } ?>
+
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="modal fade" id="myModalhapus<?php echo $data['id'] ?>" role="dialog">
+                      <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                            <h4 class="modal-title float-left"> Yakin hapus Data <?php echo $data['nama_barang'] ?> ?</h4>
+                          </div>
+                          <div class="modal-body">
+
+                            <form action="" method="post" role="form">
+                              <input type="hidden" name="id" value="<?php echo $data['id'] ?>">
+                              <button type="submit" class="btn btn-primary" name="submitHapus">Ya</button>
+                            </form>
+                            <?php
+                            include('koneksi.php');
+
+                            //melakukan pengecekan jika button submit diklik maka akan menjalankan perintah simpan dibawah ini
+                            if (isset($_POST['submitHapus'])) {
+                              $id = $_POST['id'];
+                              $data = mysqli_query($koneksi, "DELETE from tbl_stok where id = '$id'") or die(mysqli_error($koneksi));
+                            ?>
+                              <script>
+                                window.location = 'tbl_stok.php'
+                              </script>
+                            <?php } ?>
+
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
                   <?php } ?>
 
                 </tbody>
