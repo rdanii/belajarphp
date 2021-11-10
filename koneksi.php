@@ -1,6 +1,6 @@
 <?php
 // konfigurasi database
-$host       =   "localhost:3308";
+$host       =   "localhost";
 $user       =   "root";
 $password   =   "";
 $database   =   "belajar";
