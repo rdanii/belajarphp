@@ -135,7 +135,7 @@ include 'header.php';
                       <td><?php echo $harga ?></td>
                       <td>
                         <a data-toggle="modal" data-target="#myModaledit<?php echo $data['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
-                        <a href="hapus.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('anda yakin ingin hapus?')">Hapus</a>
+                        <a data-toggle="modal" data-target="#myModalhapus<?php echo $data['id'] ?>" class="btn btn-sm btn-danger">Hapus</a>
                       </td>
                     </tr>
                     <div class="modal fade" id="myModaledit<?php echo $data['id'] ?>" role="dialog">
@@ -184,6 +184,46 @@ include 'header.php';
 
                               <script>
                                 alert('Data berhasil diupdate.');
+                                window.location = 'tbl_barang.php'
+                              </script>
+                            <?php } ?>
+
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="modal fade" id="myModalhapus<?php echo $data['id'] ?>" role="dialog">
+                      <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                            <h4 class="modal-title float-left"> Yakin hapus Data <?php echo $data['nama_barang'] ?> ?</h4>
+                          </div>
+                          <div class="modal-body">
+
+                            <form action="" method="post" role="form">
+                              <input type="hidden" name="id" value="<?php echo $data['id'] ?>">
+                              <button type="submit" class="btn btn-primary" name="submitHapus">Ya</button>
+                            </form>
+                            <?php
+                            include('koneksi.php');
+
+                            //melakukan pengecekan jika button submit diklik maka akan menjalankan perintah simpan dibawah ini
+                            if (isset($_POST['submitHapus'])) {
+                              $id = $_POST['id'];
+
+                              //query hapus barang
+                              mysqli_query($koneksi, "DELETE from tbl_barang where id ='$id'") or die(mysqli_error($koneksi)); ?>
+
+                              <script>
+                                alert('Data berhasil dihapus.');
                                 window.location = 'tbl_barang.php'
                               </script>
                             <?php } ?>
