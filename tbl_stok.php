@@ -9,12 +9,12 @@ include 'header.php';
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0 ml-5">Daftar Kategori</h1>
+          <h1 class="m-0 ml-5">Daftar Stok</h1>
         </div><!-- /.col -->
         <div class="col-md-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Kategori</li>
+            <li class="breadcrumb-item active">Stok</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -30,7 +30,7 @@ include 'header.php';
         <div class="col-md-8 ml-5">
           <div class="card">
             <div class="card-header bg-secondary text-white">
-              DATA KATEGORI
+              DATA STOK
               <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#myModal">Tambah Stok</button>
             </div>
 
