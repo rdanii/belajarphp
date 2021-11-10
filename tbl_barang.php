@@ -30,7 +30,7 @@ include 'header.php';
         <div class="col-md-12">
           <div class="card">
             <div class="card-header bg-success text-white">
-              DATA BARANG 
+              DATA BARANG
               <!-- <a href="tambah.php" class="btn btn-sm btn-primary float-right">Tambah</a> -->
               <button type="button" class="btn btn-sm btn-info float-right" data-toggle="modal" data-target="#myModal">Tambah Barang</button>
 
@@ -134,10 +134,68 @@ include 'header.php';
                       <td><?php echo $data['jumlah_barang'] ?></td>
                       <td><?php echo $harga ?></td>
                       <td>
-                        <a href="edit.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-warning">Edit</a>
+                        <a data-toggle="modal" data-target="#myModaledit<?php echo $data['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
                         <a href="hapus.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('anda yakin ingin hapus?')">Hapus</a>
                       </td>
                     </tr>
+                    <div class="modal fade" id="myModaledit<?php echo $data['id'] ?>" role="dialog">
+                      <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                            <h4 class="modal-title float-left">Ubah Barang</h4>
+                          </div>
+                          <div class="modal-body">
+
+                            <form action="" method="post" role="form">
+                              <div class="form-group">
+                                <label>Nama</label>
+                                <!--  menampilkan nama barang -->
+                                <input type="text" name="nama" required="" class="form-control" value="<?= $data['nama_barang']; ?>">
+
+                                <!-- ini digunakan untuk menampung id yang ingin diubah -->
+                                <input type="hidden" name="id" value="<?php echo $data['id'] ?>">
+                              </div>
+                              <div class="form-group">
+                                <label>Harga</label>
+                                <input type="text" name="harga" class="form-control" value="<?php echo $data['harga']; ?>">
+                              </div>
+
+                              <div class="form-group">
+                                <label>Jumlah</label>
+                                <input class="form-control" name="jumlah" value="<?php echo $data['jumlah_barang']; ?>">
+                              </div>
+                              <button type="submit" class="btn btn-primary" name="submit2" onclick="return confirm('Anda yakin ingin mengubah ?')">Update Data</button>
+                            </form>
+                            <?php
+                            include('koneksi.php');
+
+                            //melakukan pengecekan jika button submit diklik maka akan menjalankan perintah simpan dibawah ini
+                            if (isset($_POST['submit2'])) {
+                              $id = $_POST['id'];
+                              $nama = $_POST['nama'];
+                              $harga = $_POST['harga'];
+                              $jumlah = $_POST['jumlah'];
+
+                              //query mengubah barang
+                              mysqli_query($koneksi, "UPDATE tbl_barang set nama_barang='$nama', harga='$harga', jumlah_barang='$jumlah' where id ='$id'") or die(mysqli_error($koneksi)); ?>
+
+                              <script>
+                                alert('Data berhasil diupdate.');
+                                window.location = 'tbl_barang.php'
+                              </script>
+                            <?php } ?>
+
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
                   <?php
                   }
                   ?>
