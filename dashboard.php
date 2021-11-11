@@ -126,13 +126,103 @@
                           <td><?php echo $data['password'] ?></td>
                           <td><?php echo $data['email'] ?></td>
                           <td>
-                            <a href="edit_user.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-warning">Edit</a>
-                            <a href="hapus_user.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin hapus?')">Hapus</a>
+                            <a data-toggle="modal" data-target="#myModaledit<?php echo $data['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
+                            <a data-toggle="modal" data-target="#myModalhapus<?php echo $data['id'] ?>" class="btn btn-sm btn-danger">Hapus</a>
                           </td>
                         </tr>
-                      <?php
-                      }
-                      ?>
+
+                        <div class="modal fade" id="myModaledit<?php echo $data['id'] ?>" role="dialog">
+                          <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                                <h4 class="modal-title float-left">Ubah Barang</h4>
+                              </div>
+                              <div class="modal-body">
+
+                                <form action="" method="post" role="form">
+                                  <div class="form-group">
+                                    <label>Username</label>
+                                    <input type="text" name="username" class="form-control" value="<?= $data['username'] ?>">
+                                    <input type="hidden" name="id" value="<?= $data['id'] ?>">
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Nama</label>
+                                    <input type="text" name="nama" class="form-control" value="<?= $data['nama'] ?>">
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" name="password" class="form-control" value="<?= $data['password'] ?>">
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="text" name="email" class="form-control" value="<?= $data['email'] ?>">
+                                  </div>
+                                  <button type="submit" name="submit2" class="btn btn-success" onclick="return confirm('Anda yakin ingin mengubah ?')">Update</button>
+                                </form>
+                                <?php
+                                include('koneksi.php');
+
+                                //melakukan pengecekan jika button submit diklik maka akan menjalankan perintah simpan dibawah ini
+                                if (isset($_POST['submit2'])) {
+                                  $id = $_POST['id'];
+                                  $username = $_POST['username'];
+                                  $nama = $_POST['nama'];
+                                  $password = md5($_POST['password']);
+                                  $email = $_POST['email'];
+                                  mysqli_query($koneksi, "UPDATE tbl_user set username='$username', nama='$nama', `password`='$password', email='$email' where id = '$id'") or die(mysqli_error($koneksi));
+                                ?>
+                                  <script>
+                                    window.location = 'dashboard.php'
+                                  </script>
+                                <?php } ?>
+
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="modal fade" id="myModalhapus<?php echo $data['id'] ?>" role="dialog">
+                          <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                                <h4 class="modal-title float-left"> Yakin hapus Data <?php echo $data['username'] ?> ?</h4>
+                              </div>
+                              <div class="modal-body">
+
+                                <form action="" method="post" role="form">
+                                  <input type="hidden" name="id" value="<?php echo $data['id'] ?>">
+                                  <button type="submit" class="btn btn-primary" name="submitHapus">Ya</button>
+                                </form>
+                                <?php
+                                include 'koneksi.php';
+                                if (isset($_POST['submitHapus'])) {
+
+                                  $id = $_POST['id'];
+                                  $data = mysqli_query($koneksi, "DELETE from tbl_user where id = '$id'") or die(mysqli_error($koneksi));
+                                ?>
+                                  <script>
+                                    window.location = 'dashboard.php'
+                                  </script>
+                                <?php } ?>
+
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      <?php } ?>
                     </tbody>
                   </table>
                   <br>
